@@ -12,18 +12,15 @@ export async function GET(context) {
 		description: SITE_DESCRIPTION,
 		site: context.site,
 		items: posts.map((post) => {
-      // Garante que a URL da imagem seja absoluta (ex: https://seusite.com)
-      // const imageUrl = post.data.heroImage.src
-      // console.log(context.site)
       const imageUrl = `${String(context.site).replace(/\/$/, '')}${post.data.heroImage.src}`;
-
       return {
         title: post.data.title,
         pubDate: post.data.pubDate,
         description: post.data.description,
-        link: `/blog/${post.data.slug}/`,
+        link: `/blog/${post.id}/`,
         // Injetamos a imagem em uma tag personalizada que o Make consegue ler perfeitamente
         customData: `
+          <language>pt-br</language>
           <media:content url="${imageUrl}" medium="image" type="image/jpeg" />
         `,
 				content: sanitizeHtml(parser.render(post.body)),
