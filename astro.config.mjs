@@ -7,7 +7,7 @@ import { defineConfig, fontProviders } from 'astro/config';
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://phsgoes.github.io',
-	// base: '/astro-blog',
+	base: '/astro-blog',
 	output: 'static',
 	integrations: [mdx(), sitemap()],
 	fonts: [
