@@ -8,7 +8,6 @@ import { SITE_DOMAIN } from './src/consts';
 // https://astro.build/config
 export default defineConfig({
 	site: SITE_DOMAIN,
-	base: '/astro-blog',  // Add this if your repo is NOT named phsgoes.github.io
 	output: 'static',      // Ensure static output
 	integrations: [mdx(), sitemap()],
 	fonts: [
