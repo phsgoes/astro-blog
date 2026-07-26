@@ -3,12 +3,11 @@
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import { defineConfig, fontProviders } from 'astro/config';
-import { SITE_DOMAIN } from './src/consts';
 
 // https://astro.build/config
 export default defineConfig({
-	site: SITE_DOMAIN,
-	base: '/astro-blog',
+	site: 'https://phsgoes.github.io/astro-blog',
+	// base: '/astro-blog',
 	output: 'static',      // Ensure static output
 	integrations: [mdx(), sitemap()],
 	fonts: [
