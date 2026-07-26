@@ -13,17 +13,22 @@ export async function GET(context) {
 		description: SITE_DESCRIPTION,
 		site: `${context.site}${SITE_BASE}`,
 		items: posts.map((post) => {
-      const imageUrl = `${String(context.site).replace(/\/$/, '')}${post.data.heroImage.src}`;
+      const imageUrl = `${String(context.site).replace(/\/$/, '')}${post.data.heroImage.src}`
+			const categoriesArray = post.data?.categories || []
+			const categoriesXml = categoriesArray
+				.map((cat) => `<category>${cat}</category>`)
+				.join('\n');
+
       return {
         title: post.data.title,
         pubDate: post.data.pubDate,
         description: post.data.description,
         link: `${SITE_BASE}/blog/${post.id}/`,
-        // Injetamos a imagem em uma tag personalizada que o Make consegue ler perfeitamente
-        customData: `
-          <language>pt-br</language>
-          <media:content url="${imageUrl}" medium="image" type="image/jpeg" />
-        `,
+				customData: `
+          ${categoriesXml}
+					<language>pt-br</language>
+					<media:content url="${imageUrl}" medium="image" type="image/jpeg" />
+				`,
 				content: sanitizeHtml(parser.render(post.body)),
 				...post.data,
       };
