@@ -6,6 +6,7 @@ import MarkdownIt from 'markdown-it';
 const parser = new MarkdownIt();
 
 export async function GET(context) {
+  console.log(context.site)
 	const posts = await getCollection('blog');
 	return rss({
 		title: SITE_TITLE,
@@ -13,10 +14,10 @@ export async function GET(context) {
 		site: context.site,
 		items: posts.map((post) => {
       // Garante que a URL da imagem seja absoluta (ex: https://seusite.com)
-      const imageUrl = post.data.heroImage.src.startsWith('https') 
-        ? post.data.heroImage.src
-        : `${String(context.site).replace(/\/$/, '')}${post.data.heroImage.src}`;
-      console.log(imageUrl)
+      const imageUrl = post.data.heroImage.src
+      // const imageUrl = post.data.heroImage.src.startsWith('https') 
+      //   ? post.data.heroImage.src
+      //   : `${String(context.site).replace(/\/$/, '')}${post.data.heroImage.src}`;
 
       return {
         title: post.data.title,
@@ -25,7 +26,7 @@ export async function GET(context) {
         link: `/blog/${post.data.slug}/`,
         // Injetamos a imagem em uma tag personalizada que o Make consegue ler perfeitamente
         customData: `
-          <media:content url="${imageUrl}" medium="image"  type="image/jpeg" />
+          <media:content url="${imageUrl}" medium="image" type="image/jpeg" />
         `,
 				content: sanitizeHtml(parser.render(post.body)),
 				...post.data,
