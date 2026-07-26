@@ -3,6 +3,7 @@ import rss from '@astrojs/rss';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import sanitizeHtml from 'sanitize-html';
 import MarkdownIt from 'markdown-it';
+import { SITE_BASE } from '../../astro.config.mjs';
 const parser = new MarkdownIt();
 
 export async function GET(context) {
@@ -17,7 +18,7 @@ export async function GET(context) {
         title: post.data.title,
         pubDate: post.data.pubDate,
         description: post.data.description,
-        link: `/blog/${post.id}/`,
+        link: `${SITE_BASE}blog/${post.id}/`,
         // Injetamos a imagem em uma tag personalizada que o Make consegue ler perfeitamente
         customData: `
           <language>pt-br</language>
