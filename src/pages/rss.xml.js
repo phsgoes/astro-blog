@@ -11,14 +11,14 @@ export async function GET(context) {
 	return rss({
 		title: SITE_TITLE,
 		description: SITE_DESCRIPTION,
-		site: context.site,
+		site: `${context.site}${SITE_BASE}`,
 		items: posts.map((post) => {
       const imageUrl = `${String(context.site).replace(/\/$/, '')}${post.data.heroImage.src}`;
       return {
         title: post.data.title,
         pubDate: post.data.pubDate,
         description: post.data.description,
-        link: `${SITE_BASE}blog/${post.id}/`,
+        link: `${SITE_BASE}/blog/${post.id}/`,
         // Injetamos a imagem em uma tag personalizada que o Make consegue ler perfeitamente
         customData: `
           <language>pt-br</language>
