@@ -8,6 +8,7 @@ import { SITE_DOMAIN } from './src/consts';
 // https://astro.build/config
 export default defineConfig({
 	site: SITE_DOMAIN,
+	base: '/astro-blog',
 	output: 'static',      // Ensure static output
 	integrations: [mdx(), sitemap()],
 	fonts: [
