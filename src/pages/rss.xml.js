@@ -16,6 +16,7 @@ export async function GET(context) {
       const imageUrl = post.data.heroImage.src.startsWith('https') 
         ? post.data.heroImage.src
         : `${String(context.site).replace(/\/$/, '')}${post.data.heroImage.src}`;
+      console.log(imageUrl)
 
       return {
         title: post.data.title,
