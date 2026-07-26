@@ -15,6 +15,7 @@ export async function GET(context) {
 		items: posts.map((post) => {
       // Garante que a URL da imagem seja absoluta (ex: https://seusite.com)
       const imageUrl = post.data.heroImage.src
+      // console.log(context.site)
       // const imageUrl = post.data.heroImage.src.startsWith('https') 
       //   ? post.data.heroImage.src
       //   : `${String(context.site).replace(/\/$/, '')}${post.data.heroImage.src}`;
